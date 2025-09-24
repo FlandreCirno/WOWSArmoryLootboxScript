@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name                 WOWS Obtained Loot Tracker
 // @name:zh-CN           窝窝屎出货查询
-// @version              1.2
+// @version              1.3
 // @match                https://armory.worldofwarships.com/*
 // @match                https://armory.worldofwarships.asia/*
 // @match                https://armory.worldofwarships.eu/*
