@@ -23,7 +23,7 @@
 
     const urlData = "https://worldofwarships."+tld+"/papi/v1/container/?lang=";
     const urlInventory = "https://vortex.worldofwarships."+tld+"/api/inventory/";
-    const urlArmory = "https://armory.worldofwarships."+tld+"/zh-sg/category/community/5000001188/";
+    const urlArmory = "https://armory.worldofwarships."+tld+"/en/category/community/5000001188/";
 
     const lang = (navigator.language || navigator.userLanguage || 'en').startsWith('zh') ? 'zh' : 'en';
     const langBoxes = navigator.language || navigator.userLanguage || 'en';
