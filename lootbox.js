@@ -1,21 +1,29 @@
 // ==UserScript==
-// @name         WOWS Obtained Loot Tracker
-// @name:zh-CN   窝窝屎出货查询
-// @version      1.0
-// @match        https://armory.worldofwarships.com/*
-// @namespace    https://github.com/yourusername/wows-lootbox
-// @description  Check the drop table of selected lootbox in World of Warships Armory
-// @run-at       document-start
-// @grant        unsafeWindow
-// @license      MIT
+// @name                 WOWS Obtained Loot Tracker
+// @name:zh-CN           窝窝屎出货查询
+// @version              1.1
+// @match                https://armory.worldofwarships.com/*
+// @match                https://armory.worldofwarships.asia/*
+// @match                https://armory.worldofwarships.eu/*
+// @namespace            https://github.com/FlandreCirno/WOWSArmoryLootboxScript
+// @description          Check the drop table of selected lootbox in World of Warships Armory
+// @description:zh-CN    窝窝屎军械库箱子掉落查询工具
+// @run-at               document-start
+// @grant                unsafeWindow
+// @license              MIT
+// @downloadURL https://update.greasyfork.org/scripts/550492/WOWS%20Obtained%20Loot%20Tracker.user.js
+// @updateURL https://update.greasyfork.org/scripts/550492/WOWS%20Obtained%20Loot%20Tracker.meta.js
 // ==/UserScript==
 
 (function() {
     'use strict';
 
-    const urlData = "https://worldofwarships.com/papi/v1/container/?lang=";
-    const urlInventory = "https://vortex.worldofwarships.com/api/inventory/";
-    const urlArmory = "https://armory.worldofwarships.com/zh-sg/category/community/5000001188/";
+    const hostname = window.location.hostname;
+    const tld = hostname.split('.').pop();
+
+    const urlData = "https://worldofwarships."+tld+"/papi/v1/container/?lang=";
+    const urlInventory = "https://vortex.worldofwarships."+tld+"/api/inventory/";
+    const urlArmory = "https://armory.worldofwarships."+tld+"/zh-sg/category/community/5000001188/";
 
     const lang = (navigator.language || navigator.userLanguage || 'en').startsWith('zh') ? 'zh' : 'en';
     const langBoxes = navigator.language || navigator.userLanguage || 'en';
@@ -80,7 +88,7 @@
     async function init() {
         const allItems = await fetchJSON(urlData + langBoxes);
         const inventory = await fetchJSON(urlInventory);
-        const containerInventory = Object.keys(inventory.data.lootboxes);
+        const containerInventory = Object.keys(inventory.data.lootboxes) || [];
 
         const allTable = createTable(allItems.items);
         const ownedTable = createTable(allItems.items.filter(i => containerInventory.includes(i.id)));
