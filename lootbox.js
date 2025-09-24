@@ -23,10 +23,11 @@
 
     const urlData = "https://worldofwarships."+tld+"/papi/v1/container/?lang=";
     const urlInventory = "https://vortex.worldofwarships."+tld+"/api/inventory/";
-    const urlArmory = "https://armory.worldofwarships."+tld+"/en/category/community/5000001188/";
 
     const lang = (navigator.language || navigator.userLanguage || 'en').startsWith('zh') ? 'zh' : 'en';
-    const langBoxes = navigator.language || navigator.userLanguage || 'en';
+    const langBoxes = window.location.pathname.split('/').filter(Boolean)[0];
+    
+    const urlArmory = "https://armory.worldofwarships."+tld+"/"+langBoxes+"/category/community/5000001188/";
 
     const text = {
         allLootboxes: { en: "All Lootboxes", zh: "全部箱子" },
